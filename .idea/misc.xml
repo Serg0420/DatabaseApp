@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/DatabaseApp/app/src/main/res/layout/activity_main.xml" value="0.2675925925925926" />
         <entry key="..\:/DatabaseApp/app/src/main/res/layout/fragment_add_show.xml" value="0.328125" />
+        <entry key="..\:/DatabaseApp/app/src/main/res/layout/fragment_bottom_navigation.xml" value="0.31979166666666664" />
         <entry key="..\:/DatabaseApp/app/src/main/res/layout/fragment_shows_lst.xml" value="0.328125" />
         <entry key="..\:/DatabaseApp/app/src/main/res/layout/show_lst_elem.xml" value="0.328125" />
         <entry key="..\:/DatabaseApp/app/src/main/res/layout/show_lst_element.xml" value="0.7816377171215881" />
+        <entry key="..\:/DatabaseApp/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.31979166666666664" />
       </map>
     </option>
   </component>

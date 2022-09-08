@@ -41,8 +41,6 @@ class ShowsLstFragment:Fragment() {
 
             showsLst.adapter = adapter
 
-            showDao.insertShows(RoomShow(showName = "gggg", showSeries = "dd2"))
-
             adapter.submitList(showDao.getAllShows())
 
         }
