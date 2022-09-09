@@ -9,20 +9,31 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.databaseapp.databinding.ShowLstElemBinding
 
 class ShowsViewHolder(
-    private val binding: ShowLstElemBinding
+    private val binding: ShowLstElemBinding,
+    private val onShowLongClicked: (RoomShow) -> Unit,
+    private val onShowClicked: (RoomShow) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: RoomShow) {
         with(binding) {
+            root.setOnLongClickListener {
+                onShowLongClicked(item)
+                return@setOnLongClickListener true
+            }
+            root.setOnClickListener {
+                onShowClicked(item)
+            }
             showNameTxtv.text = item.showName
-            seriesTxtv.text=item.showSeries
+            seriesTxtv.text = item.showSeries
         }
     }
 
 }
 
 class ShowsAdapter(
-    context: Context
+    context: Context,
+    private val onShowLongClicked: ((RoomShow) -> Unit),
+    private val onShowClicked: ((RoomShow) -> Unit)
 ) : ListAdapter<RoomShow, ShowsViewHolder>(DIFF_UTIL) {
 
     private val layoutInflater = LayoutInflater.from(context)
@@ -30,8 +41,10 @@ class ShowsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowsViewHolder {
 
         return ShowsViewHolder(
-                binding = ShowLstElemBinding.inflate(layoutInflater, parent, false)
-            )
+            binding = ShowLstElemBinding.inflate(layoutInflater, parent, false),
+            onShowLongClicked,
+            onShowClicked
+        )
 
     }
 

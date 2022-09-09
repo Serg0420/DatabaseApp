@@ -16,7 +16,7 @@ data class RoomShow(
 interface RoomShowDao{
     @Query("SELECT * FROM roomshow")
     fun getAllShows():List<RoomShow>
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertShows(vararg shows:RoomShow)
     @Delete
     fun deleteShow(show:RoomShow)
