@@ -16,6 +16,8 @@ data class RoomShow(
 interface RoomShowDao{
     @Query("SELECT * FROM roomshow")
     fun getAllShows():List<RoomShow>
+    @Query("SELECT * FROM roomshow WHERE name LIKE '%'||:showName||'%'")
+    fun getAllSearchedByName(showName: String):List<RoomShow>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertShows(vararg shows:RoomShow)
     @Delete

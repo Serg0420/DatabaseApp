@@ -11,7 +11,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.container, BottomNavigationFragment())
-            .addToBackStack(null)
             .commit()
     }
 

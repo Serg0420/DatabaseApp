@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.room.Query
 import com.example.databaseapp.databinding.FragmentShowsLstBinding
+import com.google.android.material.divider.MaterialDividerItemDecoration
 
 class ShowsLstFragment : Fragment() {
 
@@ -49,8 +52,44 @@ class ShowsLstFragment : Fragment() {
 
         with(binding) {
 
-            showsLst.adapter = adapter
+            showsLst.addItemDecoration(
+                MaterialDividerItemDecoration(
+                    requireContext(), MaterialDividerItemDecoration.VERTICAL
+                )
+            )
 
+            val roomShowLst= mutableListOf<RoomShow>()
+            roomShowLst.addAll(showDao.getAllShows())
+
+            toolbar
+                .menu
+                .findItem(R.id.action_search)
+                .actionView
+                .let { it as SearchView }
+                .setOnQueryTextListener(
+                    object : SearchView.OnQueryTextListener {
+                        override fun onQueryTextSubmit(searchedTxt: String): Boolean {
+                            return false
+                        }
+
+                        override fun onQueryTextChange(searchedTxt: String): Boolean {
+                            adapter.submitList(
+                                /*
+                                тут лучше использовать фильтр по заранее созданному списку, в
+                                который один раз приходят данные из бд чем
+                                спользовать запрос как ниже закомментирован
+                                */
+                                roomShowLst.filter {
+                                    it.showName.contains(searchedTxt)
+                                }
+                                //showDao.getAllSearchedByName(searchedTxt)
+                            )
+                            return true
+                        }
+                    }
+                )
+
+            showsLst.adapter = adapter
             refreshShowList()
 
         }
@@ -75,13 +114,13 @@ class ShowsLstFragment : Fragment() {
     }
 
     private fun editShow(roomShow: RoomShow) {
-        val editDialogFragment=EditDialogFragment(roomShow){
+        val editDialogFragment = EditDialogFragment(roomShow) {
             refreshShowList()
         }
-        editDialogFragment.show(childFragmentManager,null)
+        editDialogFragment.show(childFragmentManager, null)
     }
 
-    private fun refreshShowList(){
+    private fun refreshShowList() {
         adapter.submitList(showDao.getAllShows())
     }
 
