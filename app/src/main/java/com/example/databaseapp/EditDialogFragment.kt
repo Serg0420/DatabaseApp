@@ -12,7 +12,7 @@ import com.example.databaseapp.databinding.FragmentEditDialogBinding
 class EditDialogFragment(
     private val roomShow: RoomShow,
     private val refreshShowList: () -> Unit
-    ) : DialogFragment() {
+) : DialogFragment() {
 
     private var _binding: FragmentEditDialogBinding? = null
 
@@ -39,7 +39,7 @@ class EditDialogFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        isCancelable=true
+        isCancelable = true
 
         with(binding) {
 
@@ -48,10 +48,10 @@ class EditDialogFragment(
 
             confirmEditBtn.setOnClickListener {
                 if (showNameTxtv.text.toString() != "" && seriesTxtv.text.toString() != "") {
-                    val newRoomShow=RoomShow(
-                        id=roomShow.id,
-                        showName=showNameTxtv.text.toString(),
-                        showSeries=seriesTxtv.text.toString()
+                    val newRoomShow = RoomShow(
+                        id = roomShow.id,
+                        showName = showNameTxtv.text.toString(),
+                        showSeries = seriesTxtv.text.toString()
                     )
                     /*
                     т.к. у нас в интерфейсе прописана стратегия на замену в случае конфликта,
@@ -61,7 +61,7 @@ class EditDialogFragment(
                     refreshShowList()
                     dismiss()
                 } else {
-                    handleError("Write something in fields above")
+                    handleError(getString(R.string.error_add_message))
                 }
             }
 

@@ -3,10 +3,10 @@
     <item
         android:id="@+id/navigation_show_lst"
         android:icon="@android:drawable/btn_star_big_on"
-        android:title="Shows List"/>
+        android:title="@string/shows_list" />
 
     <item
         android:id="@+id/navigation_show_add"
         android:icon="@android:drawable/ic_menu_add"
-        android:title="Add Show"/>
+        android:title="@string/add_show" />
 </menu>

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.room.Query
 import com.example.databaseapp.databinding.FragmentShowsLstBinding
 import com.google.android.material.divider.MaterialDividerItemDecoration
 
@@ -26,6 +25,7 @@ class ShowsLstFragment : Fragment() {
             }
         )
     }
+
     private val showDao by lazy {
         requireContext().showDatabase.showDao()
     }
@@ -51,13 +51,14 @@ class ShowsLstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-
+            //добавил разделитель
             showsLst.addItemDecoration(
                 MaterialDividerItemDecoration(
                     requireContext(), MaterialDividerItemDecoration.VERTICAL
                 )
             )
 
+            //по этому списку будем фильтровать в тулбаре
             val roomShowLst= mutableListOf<RoomShow>()
             roomShowLst.addAll(showDao.getAllShows())
 
@@ -75,9 +76,9 @@ class ShowsLstFragment : Fragment() {
                         override fun onQueryTextChange(searchedTxt: String): Boolean {
                             adapter.submitList(
                                 /*
-                                тут лучше использовать фильтр по заранее созданному списку, в
-                                который один раз приходят данные из бд чем
-                                спользовать запрос как ниже закомментирован
+                                тут, наверно, лучше использовать фильтр по заранее созданному
+                                списку как я сделал, в который один раз приходят данные из бд чем
+                                использовать запрос как ниже закомментирован
                                 */
                                 roomShowLst.filter {
                                     it.showName.contains(searchedTxt)
@@ -95,7 +96,6 @@ class ShowsLstFragment : Fragment() {
         }
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -104,7 +104,7 @@ class ShowsLstFragment : Fragment() {
     private fun deleteShow(roomShow: RoomShow) {
         AlertDialog.Builder(requireContext())
             .setCancelable(true)
-            .setMessage("Delete this show from your list?")
+            .setMessage(getString(R.string.delete_message))
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 showDao.deleteShow(roomShow)
                 refreshShowList()

@@ -4,7 +4,6 @@
     android:id="@+id/navigation"
     app:startDestination="@id/navigation_show_lst">
 
-
     <include app:graph="@navigation/navigation_show_lst" />
     <include app:graph="@navigation/navigation_show_add" />
 </navigation>

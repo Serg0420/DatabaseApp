@@ -44,7 +44,7 @@ class AddShowFragment : Fragment() {
 
                     AlertDialog.Builder(requireContext())
                         .setCancelable(true)
-                        .setMessage("Add this show to your list?")
+                        .setMessage(getString(R.string.add_message))
                         .setPositiveButton(android.R.string.ok) { _, _ ->
                             showDao.insertShows(
                                 RoomShow(
@@ -59,13 +59,12 @@ class AddShowFragment : Fragment() {
                         .show()
 
                 } else {
-                    handleError("Write something in fields above")
+                    handleError(getString(R.string.error_add_message))
                 }
             }
 
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

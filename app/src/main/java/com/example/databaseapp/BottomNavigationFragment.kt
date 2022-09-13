@@ -12,9 +12,10 @@ import com.example.databaseapp.databinding.FragmentBottomNavigationBinding
 class BottomNavigationFragment : Fragment() {
 
     private var _binding: FragmentBottomNavigationBinding? = null
-    private val binding get() = requireNotNull(_binding) {
-        "View was destroyed"
-    }
+    private val binding
+        get() = requireNotNull(_binding) {
+            "View was destroyed"
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
